@@ -3,11 +3,13 @@ import { useFormState } from "./FormContext";
 import { useState } from "react";
 
 type TFormValues = {
-  password: string;
-  confirmPassword: string;
+  country: string;
+  city: string;
+  address: string;
+  postalCode: string;
 };
 
-export function PasswordForm() {
+export function LocationInfoForm() {
   const [isCreated, setCreated] = useState(false);
   const { setFormData, formData, onHandleBack } = useFormState();
   const { register, handleSubmit } = useForm<TFormValues>({
@@ -21,19 +23,44 @@ export function PasswordForm() {
 
   return isCreated ? (
     <div>
-      <p>Account created successfully</p>
+      <p>Added to Kabir's friend list successfully</p>
       <pre>{JSON.stringify(formData)}</pre>
     </div>
   ) : (
     <form className="space-y-6" onSubmit={handleSubmit(onHandleFormSubmit)}>
       <div className="flex gap-1 flex-col">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="country">Country</label>
         <input
-          autoFocus
-          id="password"
-          {...register("password")}
+          id="country"
+          {...register("country")}
           className="border h-11 px-4 rounded-md focus:outline-blue-500 "
-          type="password"
+          required={true}
+        />
+      </div>
+      <div className="flex gap-1 flex-col">
+        <label htmlFor="city">City</label>
+        <input
+          id="city"
+          {...register("city")}
+          className="border h-11 px-4 rounded-md focus:outline-blue-500 "
+          required={true}
+        />
+      </div>
+      <div className="flex gap-1 flex-col">
+        <label htmlFor="address">Address</label>
+        <input
+          id="address"
+          {...register("address")}
+          className="border h-11 px-4 rounded-md focus:outline-blue-500 "
+          required={true}
+        />
+      </div>
+      <div className="flex gap-1 flex-col">
+        <label htmlFor="postalCode">Postal Code</label>
+        <input
+          id="postalCode"
+          {...register("postalCode")}
+          className="border h-11 px-4 rounded-md focus:outline-blue-500 "
           required={true}
         />
       </div>
